@@ -30,24 +30,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Human',
-            fields=[
-                ('user_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('title', models.TextField(max_length=50, verbose_name='Название')),
-                ('avatar', models.ImageField(blank=True, upload_to='human/%Y/%m/%d')),
-                ('phone', models.CharField(max_length=15)),
-            ],
-            options={
-                'verbose_name': 'Человек',
-                'verbose_name_plural': 'Человечки',
-                'ordering': ['-title'],
-            },
-            bases=('auth.user',),
-            managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
-            ],
-        ),
-        migrations.CreateModel(
             name='Professions',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),

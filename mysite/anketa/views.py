@@ -213,33 +213,222 @@ class QuestionsDelete(DeleteView):
 	success_url = '/anketa/questions/'
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
-class QuestionsView(ListView):
-    model = Questions
-    context_object_name = 'questions_list'
-    success_url = reverse_lazy('anketa:questions')
+class Model_profView(ListView):
+	model = Model_prof
+	context_object_name = 'modelprof_list'
+	success_url = reverse_lazy('anketa:Model_profView')
 
-    paginate_by = item_for_page
+	paginate_by = item_for_page
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(Model_profView,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name_plural
+		context['col1name'] = self.model._meta.get_field("title").verbose_name
+		context['col2name'] = self.model._meta.get_field("professions").verbose_name
+		context['col3name'] = self.model._meta.get_field("skills").verbose_name
+		context['col4name'] = self.model._meta.get_field("score").verbose_name
+		context['collastname'] = 'Cервисы'
+		return context
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
-class ModelProfView(ListView):
-    model = Model_prof
-    context_object_name = 'modelprof_list'
-    success_url = reverse_lazy('anketa:modelprof')
+class Model_profUpdate(UpdateView):
+	model = Model_prof
+	template_name_suffix = '_update_form'
+	fields = '__all__'
+	success_url = '/anketa/model_prof/'
 
-    paginate_by = item_for_page
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(Model_profUpdate,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['slovar'] = {'title','professions'}
+		context['secslovar'] = {'skills',"score"}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		context['model'] = self.model
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class Model_profDetail(DetailView):
+	model = Model_prof
+	context_object_name = 'modelprof_one'
+	success_url = '/anketa/model_prof/'
+
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(Model_profDetail,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['slovar'] = {'title','professions'}
+		context['secslovar'] = {'skills',"score"}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		context['model'] = self.model
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class Model_profCreate(CreateView):
+	model = Model_prof
+	context_object_name = 'modelprof_one'
+	success_url = '/anketa/model_prof/'
+
+	template_name_suffix = '_create_form'
+	fields = '__all__'
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(Model_profCreate,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['model'] = self.model
+		context['slovar'] = {'title','professions'}
+		context['secslovar'] = {'skills',"score"}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class Model_profDelete(DeleteView):
+	model = Model_prof
+	success_url = '/anketa/model_prof/'
+
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
 class BlankView(ListView):
-    model = Blank
-    context_object_name = 'blank_list'
-    success_url = reverse_lazy('anketa:blank')
+	model = Blank
+	context_object_name = 'blank_list'
+	success_url = reverse_lazy('anketa:BlankView')
 
-    paginate_by = item_for_page
+	paginate_by = item_for_page
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(BlankView,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name_plural
+		context['col1name'] = self.model._meta.get_field("title").verbose_name
+		context['col2name'] = self.model._meta.get_field("image_full").verbose_name
+		context['col3name'] = self.model._meta.get_field("image_one").verbose_name
+		context['collastname'] = 'Cервисы'
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class BlankUpdate(UpdateView):
+	model = Blank
+	fields = '__all__'
+	success_url = '/anketa/blank/'
+	template_name_suffix = '_update_form'
+
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(BlankUpdate,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['slovar'] = {'title'}
+		context['secslovar'] = {'image_full','image_one'}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		context['model'] = self.model
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class BlankDetail(DetailView):
+	model = Blank
+	context_object_name = 'blank_one'
+	success_url = '/anketa/blank/'
+
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(BlankDetail,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['slovar'] = {'title'}
+		context['secslovar'] = {'image_full','image_one'}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		context['model'] = self.model
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class BlankCreate(CreateView):
+	model = Blank
+	context_object_name = 'blank_one'
+	success_url = '/anketa/blank/'
+
+	template_name_suffix = '_create_form'
+	fields = '__all__'
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(BlankCreate,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['model'] = self.model
+		context['slovar'] = {'title'}
+		context['secslovar'] = {'image_full','image_one'}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class BlankDelete(DeleteView):
+	model = Blank
+	success_url = '/anketa/blank/'
+
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
 class HumanView(ListView):
-    model = Human
-    context_object_name = 'human_list'
-    success_url = reverse_lazy('anketa:human')
+	model = Human
+	context_object_name = 'human_list'
+	success_url = reverse_lazy('anketa:HumanView')
 
-    paginate_by = item_for_page
+	paginate_by = item_for_page
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(HumanView,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name_plural
+		context['col1name'] = self.model._meta.get_field("title").verbose_name
+		context['col2name'] = self.model._meta.get_field("avatar").verbose_name
+		context['col3name'] = self.model._meta.get_field("phone").verbose_name
+		context['collastname'] = 'Cервисы'
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class HumanUpdate(UpdateView):
+	model = Human
+	fields = '__all__'
+	success_url = '/anketa/human/'
+	template_name_suffix = '_update_form'
+
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(HumanUpdate,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['slovar'] = {'title'}
+		context['secslovar'] = {'avatar','phone'}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		context['model'] = self.model
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class HumanDetail(DetailView):
+	model = Human
+	context_object_name = 'human_one'
+	success_url = '/anketa/human/'
+
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(HumanDetail,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['slovar'] = {'title'}
+		context['secslovar'] = {'avatar','phone'}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		context['model'] = self.model
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class HumanCreate(CreateView):
+	model = Human
+	context_object_name = 'human_one'
+	success_url = '/anketa/human/'
+
+	template_name_suffix = '_create_form'
+	fields = '__all__'
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(HumanCreate,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['model'] = self.model
+		context['slovar'] = {'title'}
+		context['secslovar'] = {'avatar','phone'}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class HumanDelete(DeleteView):
+	model = Human
+	success_url = '/anketa/human/'

@@ -34,7 +34,7 @@ class Skills(models.Model):
 
 class Questions(models.Model):
     title = models.TextField(max_length=50, verbose_name="Название")
-    score = models.PositiveIntegerField()
+    score = models.PositiveIntegerField(verbose_name="Очки")
     skills = models.ForeignKey(Skills, on_delete=models.PROTECT, verbose_name="Навык", related_name="SkillsQuestions")
 
     class Meta:
@@ -54,7 +54,7 @@ class Model_prof(models.Model):
     title = models.TextField(max_length=50, verbose_name="Название")
     professions = models.ForeignKey(Professions, on_delete=models.PROTECT, verbose_name="Профессия")
     skills = models.ForeignKey(Skills, on_delete=models.PROTECT, verbose_name="Навык", related_name="SkillsProf")
-    score = models.PositiveIntegerField()
+    score = models.PositiveIntegerField(verbose_name="Очки")
 
     class Meta:
         ordering = ["-title"]
@@ -70,8 +70,8 @@ class Model_prof(models.Model):
     
 class Blank(models.Model):
     title = models.TextField(max_length=50, verbose_name="Название")
-    image_full = models.ImageField(upload_to='blank/%Y/%m/%d', blank=True)
-    image_one= models.ImageField(upload_to='blank/%Y/%m/%d', blank=True)
+    image_full = models.ImageField(upload_to='blank/%Y/%m/%d', blank=True, verbose_name="Изображение")
+    image_one = models.ImageField(upload_to='blank/%Y/%m/%d', blank=True, verbose_name="Изображение")
 
     class Meta:
         ordering = ["-title"]
@@ -85,10 +85,10 @@ class Blank(models.Model):
         return [(field.name, field.value_to_string(self))
                 for field in Blank._meta.fields]
     
-class Human(User):
+class Human(models.Model):
     title = models.TextField(max_length=50, verbose_name="Название")
-    avatar = models.ImageField(upload_to='human/%Y/%m/%d', blank=True)
-    phone = models.CharField(max_length=15)
+    avatar = models.ImageField(upload_to='human/%Y/%m/%d', blank=True, verbose_name="Аватар")
+    phone = models.CharField(max_length=15, verbose_name="Номер телефона")
 
     class Meta:
         ordering = ["-title"]

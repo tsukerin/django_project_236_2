@@ -43,6 +43,15 @@
                             </h5>
                         </td>
                         <td>
+                            <h5 class="card-title">
+                                {{ item.score }}
+                            </h5>
+                        </td>
+                        <td>
+                            <h5 class="card-title">
+                                {{ item.skills }}
+                            </h5>
+                        <td>
                             <button class="btn bg-primary  btn-sm">
                                 <a href="{% url 'anketa:QuestionsUpdate' item.pk %}">Редактировать</a>
                             </button>

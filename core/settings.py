@@ -160,4 +160,3 @@ STATICFILES_DIRS = (
 )
 
 
-
