@@ -34,8 +34,8 @@ class Skills(models.Model):
 
 class Questions(models.Model):
     title = models.TextField(max_length=50, verbose_name="Название")
-    Score = models.PositiveIntegerField()
-    Skills = models.ForeignKey(Skills, on_delete=models.PROTECT, verbose_name="Навык")
+    score = models.PositiveIntegerField()
+    skills = models.ForeignKey(Skills, on_delete=models.PROTECT, verbose_name="Навык", related_name="SkillsQuestions")
 
     class Meta:
         ordering = ["-title"]
@@ -52,9 +52,9 @@ class Questions(models.Model):
 
 class Model_prof(models.Model):
     title = models.TextField(max_length=50, verbose_name="Название")
-    Professions = models.ForeignKey(Professions, on_delete=models.PROTECT, verbose_name="Профессия")
-    Skills = models.ForeignKey(Skills, on_delete=models.PROTECT, verbose_name="Навык")
-    Score = models.PositiveIntegerField()
+    professions = models.ForeignKey(Professions, on_delete=models.PROTECT, verbose_name="Профессия")
+    skills = models.ForeignKey(Skills, on_delete=models.PROTECT, verbose_name="Навык", related_name="SkillsProf")
+    score = models.PositiveIntegerField()
 
     class Meta:
         ordering = ["-title"]

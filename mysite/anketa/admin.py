@@ -12,11 +12,11 @@ class SkillsAdmin(admin.ModelAdmin):
 admin.site.register(Skills, SkillsAdmin)
 
 class QuestionsAdmin(admin.ModelAdmin):
-    list_display = ['title', 'Score', 'Skills']
+    list_display = ['title', 'score', 'skills']
 admin.site.register(Questions, QuestionsAdmin)
 
 class Model_profAdmin(admin.ModelAdmin):
-    list_display = ['title', 'Professions', 'Skills','Score']
+    list_display = ['title', 'professions', 'skills','score']
 admin.site.register(Model_prof, Model_profAdmin)
 
 class BlankAdmin(admin.ModelAdmin):

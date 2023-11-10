@@ -4,10 +4,10 @@ from mysite.anketa.models import *
 
 class Answers(models.Model):
     title = models.TextField(max_length=50, verbose_name="Название")
-    Users = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Пользователь")
-    Skills = models.ForeignKey(Skills, on_delete=models.PROTECT, verbose_name="Навык")
-    Score = models.PositiveIntegerField()
-    Date = models.DateTimeField(auto_now_add=True)
+    users = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Пользователь", related_name="SkillsUser")
+    skills = models.ForeignKey(Skills, on_delete=models.PROTECT, verbose_name="Навык", related_name="SkillsAns")
+    score = models.PositiveIntegerField()
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ["-title"]
@@ -23,10 +23,10 @@ class Answers(models.Model):
 
 class Sertif(models.Model):
     title = models.TextField(max_length=50, verbose_name="Название")
-    Users = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Пользователь")
-    Blank = models.ForeignKey(Blank, on_delete=models.PROTECT, verbose_name="Бланк")
-    Date = models.DateTimeField(auto_now_add=True)
-    Filled_sertif = models.ImageField(upload_to='serif/%Y/%m/%d', blank=True)
+    users = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Пользователь", related_name="SertifUser")
+    blank = models.ForeignKey(Blank, on_delete=models.PROTECT, verbose_name="Бланк", related_name="BlankSertif")
+    date = models.DateTimeField(auto_now_add=True)
+    filled_sertif = models.ImageField(upload_to='serif/%Y/%m/%d', blank=True)
 
     class Meta:
         ordering = ["-title"]

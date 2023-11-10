@@ -23,6 +23,16 @@ def cfg_assets_root(request):
                         {'name': 'Вертолеты', 'url': reverse('helicopter:MyHelicopter')},
                     ]
                 },
+                {
+                    'name': 'Анкета',
+                    'color': 'text-warning',
+                    'children': [
+                        {'name': 'Профессии', 'url': reverse('anketa:professions')},
+                        {'name': 'Скиллы', 'url': reverse('anketa:skills')},
+                        {'name': 'Вопросы', 'url': reverse('anketa:questions')},
+                    ]
+                },
+                
             ]
         else: sidebar = [{
             'name': 'пакет 2',
