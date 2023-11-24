@@ -39,12 +39,7 @@ def cfg_assets_root(request):
                     'name': 'Сертификат',
                     'color': 'text-success',
                     'children': [
-                        {'name': 'Профессии', 'url': reverse('anketa:professions')},
-                        {'name': 'Скиллы', 'url': reverse('anketa:skills')},
-                        {'name': 'Вопросы', 'url': reverse('anketa:questions')},
-                        {'name': 'Модельная профессия', 'url': reverse('anketa:model_prof')},
-                        {'name': 'Бланк', 'url': reverse('anketa:blank')},
-                        {'name': 'Люди', 'url': reverse('anketa:human')},
+                        {'name': 'Сертификат', 'url': reverse('testik:Sertif')},
                     ]
                 },
                 

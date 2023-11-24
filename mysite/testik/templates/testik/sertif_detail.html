@@ -26,11 +26,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for name, value in mytestik_one.get_fields %}
+                    {% for name, value in sertif_one.get_fields %}
                         {% if name in slovar %}
                             <tr>
                                 <td>
-                                    {% field_name mytestik_one name %}
+                                    {% field_name sertif_one name %}
                                 </td>
                                 <td>
                                     {{ value |  nonefortext }}
@@ -40,7 +40,7 @@
                      {% if name in secslovar %}
                             <tr>
                                 <td>
-                                    {% field_name mytestik_one name %}
+                                    {% field_name sertif_one name %}
                                 </td>
                                 <td>
                                     {{ value |  nonefortext }}
@@ -52,7 +52,7 @@
                     </tbody>
                 </table>
 
-            <a href="{% url 'testik:Mytestik' %}" class="btn btn-secondary float-right">
+            <a href="{% url 'testik:Sertif' %}" class="btn btn-secondary float-right">
                 {% my_comeback %}</a>
 
 

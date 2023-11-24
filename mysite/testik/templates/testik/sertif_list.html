@@ -31,25 +31,37 @@
                         <th class="w-10">{{ col1name }}</th>
                         <th class="w-25">{{ col2name }}</th>
                         <th class="w-25">{{ col3name }}</th>
+                        <th class="w-25">{{ col4name }}</th>
+                        <th class="w-25">{{ col5name }}</th>
                         <th colspan="3">Сервисы</th>
 
                     </tr>
 
-                    {% for item in Sertif_list %}
+                    {% for item in sertif_list %}
                     <tr>
                         <td>
                             <h5 class="testikd-title">
-                                {{ item.name }}
+                                {{ item.title }}
                             </h5>
                         </td>
                         <td>
                             <h5 class="testikd-title">
-                                {{ item.color }}
+                                {{ item.users }}
                             </h5>
                         </td>
                         <td>
                             <h5 class="testikd-title">
-                                {{ item.nomb }}
+                                {{ item.blank }}
+                            </h5>
+                        </td>
+                        <td>
+                            <h5 class="testikd-title">
+                                {{ item.date }}
+                            </h5>
+                        </td>
+                        <td>
+                            <h5 class="testikd-title">
+                                {{ item.filled_sertif }}
                             </h5>
                         </td>
                         <td>
