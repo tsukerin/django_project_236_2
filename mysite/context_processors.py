@@ -6,7 +6,7 @@ from django.urls import reverse
 def cfg_assets_root(request):
 
     if request.user.is_authenticated:
-        if request.user.is_superuser:
+        if request.user.groups.filter(name='Управляющий').exists():
             sidebar = [
 
                 {
