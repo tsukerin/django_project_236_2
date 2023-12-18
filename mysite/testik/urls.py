@@ -13,4 +13,11 @@ urlpatterns = [
     path('Sertif/detail/<int:pk>/', SertifDetail.as_view(), name='SertifDetail'),
     path('Sertif/create/', SertifCreate.as_view(), name='SertifCreate'),
     path('Sertif/delete/<int:pk>/', SertifDelete.as_view(), name='SertifDelete'),
+
+    path('Answers/', AnswersView.as_view(), name='Answers'),
+    path('Answers/update/<int:pk>/', AnswersUpdate.as_view(), name='AnswersUpdate'),
+    path('Answers/detail/<int:pk>/', AnswersDetail.as_view(), name='AnswersDetail'),
+    path('Answers/create/', AnswersCreate.as_view(), name='AnswersCreate'),
+    path('Answers/delete/<int:pk>/', AnswersDelete.as_view(), name='AnswersDelete'),
+    
 ]

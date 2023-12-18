@@ -25,7 +25,7 @@ def cfg_assets_root(request):
                 },
                 {
                     'name': 'Анкета',
-                    'color': 'text-warning',
+                    'color': 'text-danger',
                     'children': [
                         {'name': 'Профессии', 'url': reverse('anketa:professions')},
                         {'name': 'Скиллы', 'url': reverse('anketa:skills')},
@@ -42,15 +42,30 @@ def cfg_assets_root(request):
                         {'name': 'Сертификат', 'url': reverse('testik:Sertif')},
                     ]
                 },
+                                                {
+                    'name': 'Ответы',
+                    'color': 'text-warning',
+                    'children': [
+                        {'name': 'Ответы', 'url': reverse('testik:Answers')},
+                    ]
+                },
                 
             ]
-        else: sidebar = [{
+        else: sidebar = [
+            {
             'name': 'пакет 2',
             'color': 'text-warning',
             'children': [
                 {'name': 'Вертолеты', 'url': reverse('helicopter:MyHelicopter')},
+            ]},
+            {
+                'name': 'Ответы',
+                'color': 'text-success',
+                'children': [
+                    {'name': 'Ответы', 'url': reverse('testik:Answers')},
+                ]
+            },
             ]
-            }]
     else: sidebar = []
 
     return { 'ASSETS_ROOT' : settings.ASSETS_ROOT, 'SIDEBAR':  sidebar}

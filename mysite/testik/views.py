@@ -6,37 +6,37 @@ from .models import Answers, Sertif
 
 item_for_page = 15
 
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
-class AnswersView(ListView):
-    model = Answers
-    context_object_name = 'answers_list'
-    success_url = reverse_lazy('testik:answers')
+# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+# class AnswersView(ListView):
+#     model = Answers
+#     context_object_name = 'answers_list'
+#     success_url = reverse_lazy('testik:answers')
 
-    paginate_by = item_for_page
+#     paginate_by = item_for_page
 
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
-class AnswersCreate(CreateView):
-    model = Answers
-    template_name = 'testik/answers_form.html'
-    fields = '__all__'
-    success_url = reverse_lazy('testik:answers')
+# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+# class AnswersCreate(CreateView):
+#     model = Answers
+#     template_name = 'testik/answers_form.html'
+#     fields = '__all__'
+#     success_url = reverse_lazy('testik:answers')
 
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
-class AnswersUpdate(UpdateView):
-    model = Answers
-    template_name = 'testik/answers_form.html'
-    fields = '__all__'
-    success_url = reverse_lazy('testik:answers')
+# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+# class AnswersUpdate(UpdateView):
+#     model = Answers
+#     template_name = 'testik/answers_form.html'
+#     fields = '__all__'
+#     success_url = reverse_lazy('testik:answers')
 
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
-class AnswersDelete(DeleteView):
-    model = Answers
-    success_url = reverse_lazy('testik:answers')
+# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+# class AnswersDelete(DeleteView):
+#     model = Answers
+#     success_url = reverse_lazy('testik:answers')
 	
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
 class SertifView(ListView):
 	model = Sertif
-	context_object_name = 'sertif_list'
+	context_object_name = 'Sertif_list'
 	success_url = reverse_lazy('testik:SertifView')
 
 	paginate_by = item_for_page
@@ -106,3 +106,78 @@ class SertifCreate(CreateView):
 class SertifDelete(DeleteView):
 	model = Sertif
 	success_url = '/testik/Sertif/'
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class AnswersView(ListView):
+	model = Answers
+	context_object_name = 'Answers_list'
+	success_url = reverse_lazy('testik:AnswersView')
+
+	paginate_by = item_for_page
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(AnswersView,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name_plural
+		context['col1name'] = self.model._meta.get_field("title").verbose_name
+		context['col2name'] = self.model._meta.get_field("users").verbose_name
+		context['col3name'] = self.model._meta.get_field("skills").verbose_name
+		context['col4name'] = self.model._meta.get_field("score").verbose_name
+		context['col5name'] = self.model._meta.get_field("date").verbose_name
+		context['collastname'] = 'Ответы'
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class AnswersUpdate(UpdateView):
+	model = Answers
+	template_name_suffix = '_update_form'
+	fields = '__all__'
+	success_url = '/testik/Answers/'
+
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(AnswersUpdate,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['slovar'] = {'title','users', 'skills'}
+		context['secslovar'] = {'score', 'date'}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		context['model'] = self.model
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class AnswersDetail(DetailView):
+	model = Answers
+	context_object_name = 'Answers_one'
+	success_url = '/testik/Answers/'
+
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(AnswersDetail,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['slovar'] = {'title','users', 'skills'}
+		context['secslovar'] = {'score', 'date'}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		context['model'] = self.model
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class AnswersCreate(CreateView):
+	model = Answers
+	context_object_name = 'Answers_one'
+	success_url = '/testik/Answers/'
+
+	template_name_suffix = '_create_form'
+	fields = '__all__'
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super(AnswersCreate,self).get_context_data(**kwargs)
+		context['sometry'] = self.model._meta.verbose_name
+		context['slovar'] = {'title','users', 'skills'}
+		context['secslovar'] = {'score', 'date'}
+		context['hidenslovar'] = {'id'}
+		context['dopslovar'] = {'updated_at','erem','edesc','created_at'}
+		context['model'] = self.model
+		return context
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class AnswersDelete(DeleteView):
+	model = Answers
+	success_url = '/testik/Answers/'
+

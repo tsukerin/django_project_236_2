@@ -1,12 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 from mysite.anketa.models import *
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Answers(models.Model):
     title = models.TextField(max_length=50, verbose_name="Название")
     users = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Пользователь", related_name="SkillsUser")
     skills = models.ForeignKey(Skills, on_delete=models.PROTECT, verbose_name="Навык", related_name="SkillsAns")
-    score = models.PositiveIntegerField()
+    score = models.PositiveIntegerField(validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ])
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
